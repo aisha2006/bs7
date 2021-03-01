@@ -13,7 +13,7 @@ import {
   Modal,
   FlatList
 } from 'react-native';
-
+import {Icon,ListItem} from 'react-native-elements'
 import * as firebase from 'firebase';
 import db from '../config';
 import { Header } from 'react-native-elements';
@@ -40,6 +40,31 @@ export default class MyBartersScreen extends React.Component{
           this.setState({allBarters:allBarters})
         })
     }
+
+    componentDidMount(){
+      this.getAllBarters()
+    }
+
+    
+   renderItem = ( {item, i} ) =>(
+    <ListItem
+      key={i}
+      title={item.item_name}
+      subtitle={"Requested By : " + item.requested_by}
+      leftElement={<Icon name="gift" type="font-awesome" color ='#696969'/>}
+      titleStyle={{ color: 'black', fontWeight: 'bold' }}
+      rightElement={
+          <TouchableOpacity>
+            <Text>
+              exchange button
+            </Text>
+          </TouchableOpacity>
+        }
+      bottomDivider
+    />
+  )
+
+
 
     render() {
       return (
